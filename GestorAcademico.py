@@ -1,7 +1,14 @@
 import csv
 import os
 
-ARCHIVO_CSV = "estudiantes.csv"
+import csv
+import os
+
+#si no meto esta parte, solo funciona si lo corres en VS code, porque no te lo guardaria en la misma carpeta sino
+DIRECTORIO_ACTUAL = os.path.dirname(os.path.abspath(__file__))
+
+ARCHIVO_CSV = os.path.join(DIRECTORIO_ACTUAL, "estudiantes.csv")
+
 ENCABEZADOS = ["DNI", "Nombre", "Apellido", "Notas"]
 
 def cargar_datos():
@@ -222,7 +229,7 @@ def ver_csv_promediado(estudiantes):
     
 def calcular_promedio(notas_input):
     #Recibe una lista de notas (si la lista esta vacia tira 0.0, pq sino tira error pq estamos dividiendo por 0)
-    #Si hay datos, lo suma todo y lo divide por el valor q le tire el len
+    #Si hay datos, lo suma todo y lo divide por el valor q le tire el len.
     if not notas_input:
         return 0.0
     
