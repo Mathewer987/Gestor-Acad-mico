@@ -47,7 +47,7 @@ def main():
     estudiantes = cargar_datos() 
     
     while True:
-        print("\nGESTOR ACADÉMICO\n")
+        print("\nGESTOR ACADEMICO\n")
         opcion_select = input(
             "1. Registrar nuevo estudiante\n"
             "2. Registrar calificaciones\n"
@@ -73,8 +73,8 @@ def main():
             ).strip()
             
             while opcion_select2 not in ["1", "2", "3"]:
-                print("Nop. Por favor, ingresá 1, 2 o 3.")
-                opcion_select2 = input("Selección: ").strip()
+                print("Nop. Por favor, ingresa 1, 2 o 3.")
+                opcion_select2 = input("Seleccion: ").strip()
             
             if opcion_select2 == "1":
                 ver_csv_promediado(estudiantes)
@@ -91,14 +91,14 @@ def main():
             opcion_select3 = input(
                 "1. Promedio general del curso\n"
                 "2. Top 3 mejores promedios\n"
-                "3. Lista ordenada alfabéticamente (por apellido)\n"
+                "3. Lista ordenada alfabeticamente (por apellido)\n"
                 "4. Volver\n"
                 "Selección: "
             ).strip()
             
             while opcion_select3 not in ["1", "2", "3", "4"]:
-                print("Nop. Por favor, ingresá 1, 2, 3 o 4.")
-                opcion_select3 = input("Selección: ").strip()
+                print("Nop. Por favor, ingresa 1, 2, 3 o 4.")
+                opcion_select3 = input("Seleccion: ").strip()
             
             if opcion_select3 == "1":
                 
@@ -131,27 +131,27 @@ def registrar_estudiante(estudiantes):
     
     dni = input("Ingrese el DNI del estudiante (ej: 12345678): ").strip()
     while not dni.isdigit():
-        print("Nop. El DNI solo puede tener números.")
+        print("Nop. El DNI solo puede tener numeros.")
         dni = input("Ingresa el DNI de nuevo: ").strip()
 
     while dni in estudiantes:
         print(f"Nop. Fijate que ya existe un estudiante con el DNI {dni}")
         dni = input("Ingresa un DNI distinto: ").strip()
 
-    nombre = input("Ingrese el nombre: ").strip().title()
+    nombre = input("Ingresa el nombre: ").strip().title()
     
     while not nombre or not nombre.replace(" ", "").isalpha():
-        print("Nop. El nombre no puede estar vacío ni tener números o símbolos.")
-        nombre = input("Ingrese el nombre de nuevo: ").strip().title()
+        print("Nop. El nombre no puede estar vacio ni tener numeros o simbolos.")
+        nombre = input("Ingresa el nombre de nuevo: ").strip().title()
     
-    apellido = input("Ingrese el apellido: ").strip().title()
+    apellido = input("Ingresa el apellido: ").strip().title()
 
     while not apellido or not apellido.replace(" ", "").isalpha():
-        print("Nop. El apellido no puede estar vacío ni tener números o símbolos.")
-        apellido = input("Ingrese el apellido de nuevo: ").strip().title()
+        print("Nop. El apellido no puede estar vacio ni tener numeros o simbolos.")
+        apellido = input("Ingresa el apellido de nuevo: ").strip().title()
         
     estudiantes[dni] = {"nombre": nombre, "apellido": apellido, "notas": []}    
-    print(f"Se registró correctamente a {nombre} {apellido}.")
+    print(f"Se registro correctamente a {nombre} {apellido}.")
     guardar_datos(estudiantes)
     
 def registrar_calificaciones(estudiantes):
@@ -162,17 +162,17 @@ def registrar_calificaciones(estudiantes):
     print("\nREGISTRO DE CALIFICACIONES")
     
     if not estudiantes:
-        print("Nop. Primero tenés que tener registrado al menos un estudiante (la opción 1).")
+        print("Nop. Primero tenes que tener registrado al menos un estudiante (la opción 1).")
         return
 
-    dni = input("Ingresá el DNI del estudiante: ").strip()
+    dni = input("Ingresa el DNI del estudiante: ").strip()
     while not dni.isdigit():
         print("Nop. El DNI solo puede tener números.")
         dni = input("Ingresa el DNI de nuevo: ").strip()
     
     
     if dni not in estudiantes:
-        print(f"Nop. No se encontró ningún estudiante con el DNI {dni}.")
+        print(f"Nop. No se encontro ningun estudiante con el DNI {dni}.")
         return 
         
     alumno = estudiantes[dni]
@@ -180,12 +180,12 @@ def registrar_calificaciones(estudiantes):
 
     while True:
         print("\n¿Qué querés hacer?")
-        print("1. Agregar calificación")
+        print("1. Agregar calificacion")
         print("2. Finalizar carga para este alumno")
-        opcion_sub = input("Elegí una opción (1 o 2): ").strip()
+        opcion_sub = input("Elegi una opción (1 o 2): ").strip()
 
         if opcion_sub == "1":
-            entrada = input(f"Ingresá la nota numérica para {alumno['nombre']}: ").strip()
+            entrada = input(f"Ingresa la nota numerica para {alumno['nombre']}: ").strip()
             
             try:
                 nota = float(entrada) 
@@ -193,9 +193,9 @@ def registrar_calificaciones(estudiantes):
                     alumno["notas"].append(nota)
                     print(f"Se agrego el {nota} correctamente.")
                 else:
-                    print("Nop. La nota tiene que estar entre 0 y 10. Intentá de nuevo.")
+                    print("Nop. La nota tiene que estar entre 0 y 10. Intenta de nuevo.")
             except ValueError:
-                print("Nop. Tenés que ingresar un número (ej: 8 o 8.5). No letras.")
+                print("Nop. Tenés que ingresar un número (ej: 8 o 8.5). No letras ni comas.")
 
         elif opcion_sub == "2":
             print("Volviendo al menú principal...")
@@ -203,11 +203,11 @@ def registrar_calificaciones(estudiantes):
             break 
             
         else:
-            print("Nop. Opción inválida. Por favor ingresá 1 o 2.")
+            print("Nop. Opcion invalida. Por favor ingresá 1 o 2.")
    
 def ver_csv_promediado(estudiantes):
     if not estudiantes:
-        print("\nNop. No hay estudiantes registrados todavía.")
+        print("\nNop. No hay estudiantes registrados todavia.")
         return
     
     print("\nTABLA DE ESTUDIANTES (CON PROMEDIOS)")
@@ -240,11 +240,11 @@ def buscar_por_dni(estudiantes):
         print("Nop. Tenes que tener registrado por lo menos a un estudiante.")
         return
 
-    dni_buscado = input("Ingresá el DNI del estudiante a buscar: ").strip()
+    dni_buscado = input("Ingresa el DNI del estudiante a buscar: ").strip()
     
     while not dni_buscado.isdigit():
-        print("Nop. El DNI solo puede tener números.")
-        dni_buscado = input("Ingresá el DNI de nuevo: ").strip()
+        print("Nop. El DNI solo puede tener numeros.")
+        dni_buscado = input("Ingresa el DNI de nuevo: ").strip()
     
     if dni_buscado in estudiantes:
         alumno = estudiantes[dni_buscado]
@@ -262,14 +262,14 @@ def buscar_por_dni(estudiantes):
         print("-" * 81)
         
     else:
-        print(f"Nop. No se encontró ningún estudiante registrado con el DNI {dni_buscado}.")
+        print(f"Nop. No se encontro ningun estudiante registrado con el DNI {dni_buscado}.")
 
 def ver_promedio_general(estudiantes):
     
     print("\nPROMEDIO GENERAL DEL CURSO")
     
     if not estudiantes:
-        print("Nop. No hay estudiantes registrados todavía.")
+        print("Nop. No hay estudiantes registrados todavia.")
         return
         
     suma_total = 0
