@@ -5,6 +5,10 @@ ARCHIVO_CSV = "estudiantes.csv"
 ENCABEZADOS = ["DNI", "Nombre", "Apellido", "Notas"]
 
 def cargar_datos():
+    
+    #Lee el csv y carga los datos en un diccioonario en la memoria.
+    #Convierte la cadena de notas (separadas por -) enuna lista de floats.
+    #Devuelve un diccionario vacio si el archicvo no existe
     estudiantes = {}
     if not os.path.exists(ARCHIVO_CSV):
         return estudiantes
@@ -23,6 +27,9 @@ def cargar_datos():
     return estudiantes
 
 def guardar_datos(estudiantes):
+    #Escribe el csv (msotrado con el mode = "w") con el estado actual del diccionario "estudiantes".
+    #Trnsforma la lista de notas en un string serparado por - oara guardarlo en el csv
+    
     with open(ARCHIVO_CSV, mode='w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=ENCABEZADOS)
         writer.writeheader()
@@ -117,8 +124,9 @@ def main():
         else:
             print("Nop. La seleccion no esta dentro de las opciones. Por favor, intenta de nuevo. ")
 
-
 def registrar_estudiante(estudiantes): 
+    #Pide el dni, nombre y apellido del estudiante en forma de input
+    #Valida, por ej, que el dni sea numerico y unico, y que el nombre y apellido no esten vacios ni tengan numeros.
     print("\nREGISTRO DE NUEVO ESTUDIANTE")
     
     dni = input("Ingrese el DNI del estudiante (ej: 12345678): ").strip()
@@ -146,8 +154,11 @@ def registrar_estudiante(estudiantes):
     print(f"Se registró correctamente a {nombre} {apellido}.")
     guardar_datos(estudiantes)
     
-
 def registrar_calificaciones(estudiantes):
+    #Primero se fija que el formato del dni este bien (no te deja seguir hasta que no este bien), dsp q haya un alumno este registrado con ese dni
+    #Dsp con un menu y un bucle con el while true te deja cargarle mas de una nota, sin tener que hacer toda la secuencia previa de vuelta
+    #Cuando terminaste, pones para terminar la secuencia y te sube los datos al csv
+    
     print("\nREGISTRO DE CALIFICACIONES")
     
     if not estudiantes:
@@ -194,7 +205,6 @@ def registrar_calificaciones(estudiantes):
         else:
             print("Nop. Opción inválida. Por favor ingresá 1 o 2.")
    
-
 def ver_csv_promediado(estudiantes):
     if not estudiantes:
         print("\nNop. No hay estudiantes registrados todavía.")
@@ -211,6 +221,8 @@ def ver_csv_promediado(estudiantes):
     print("-" * 60)
     
 def calcular_promedio(notas_input):
+    #Recibe una lista de notas (si la lista esta vacia tira 0.0, pq sino tira error pq estamos dividiendo por 0)
+    #Si hay datos, lo suma todo y lo divide por el valor q le tire el len
     if not notas_input:
         return 0.0
     
@@ -253,6 +265,7 @@ def buscar_por_dni(estudiantes):
         print(f"Nop. No se encontró ningún estudiante registrado con el DNI {dni_buscado}.")
 
 def ver_promedio_general(estudiantes):
+    
     print("\nPROMEDIO GENERAL DEL CURSO")
     
     if not estudiantes:
@@ -272,6 +285,9 @@ def ver_promedio_general(estudiantes):
     print("-" * 50)
 
 def top_3_promedios(estudiantes):
+    #Logica parecida a orden alfabetico (pero compara datos diferentes)
+    #Como no puedo ordenar directamente el diccionario, 
+    #hago listas temporales con los datos del diccionario y lo voy organizando de ahi con el .sort y el lambda
     print("\nTOP 3 MEJORES PROMEDIOS\n")
     
     if not estudiantes:
@@ -301,6 +317,9 @@ def top_3_promedios(estudiantes):
     print("-" * 65)
 
 def alfabeticamente_por_apellido(estudiantes):
+    #Logica parecida a top 3 promedios (pero compara datos diferentes)
+    #Como no puedo ordenar directamente el diccionario, 
+    #hago listas temporales con los datos del diccionario y lo voy organizando de ahi con el .sort y el lambda
     print("\nLISTADO ORDENADO POR APELLIDO\n")
     
     if not estudiantes:
